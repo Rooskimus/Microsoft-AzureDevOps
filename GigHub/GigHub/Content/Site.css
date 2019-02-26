@@ -28,6 +28,27 @@ textarea {
     font-weight: bold;
 }
 
+.voffset {
+    margin-top: 2px;
+}
+.voffset1 {
+    margin-top: 5px;
+}
+.voffset2 {
+    margin-top: 10px;
+}
+.voffset3 {
+    margin-top: 20px;
+}
+.voffset4 {
+    margin-top: 40px;
+}
+.voffset5 { 
+    margin-top: 80px;
+}
+
+
+
 /* Bootstrap Overrides */
 .navbar-inverse {
     background-color: #ff4342;
@@ -53,6 +74,13 @@ textarea {
 .navbar-inverse .navbar-toggle:focus {
     background-color: #FF2729;
 }
+
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+        color: #fff;
+    }
+}
+
 
     .navbar-brand {
         font-weight: 700;
@@ -137,6 +165,7 @@ body {
 .gigs > li .details .artist {
     font-weight: bold;
     display: block;
+    padding-bottom: 6px;
 }
 
 .gigs > li .details .genre {
