@@ -185,7 +185,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FollowsController.cs" />
-    <Compile Include="Dtos\ArtistDto.cs" />
+    <Compile Include="Dtos\FollowDto.cs" />
     <Compile Include="Dtos\AttendanceDto.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
@@ -222,9 +222,9 @@
     <Compile Include="Migrations\201902220052089_AddAttendance.Designer.cs">
       <DependentUpon>201902220052089_AddAttendance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902252222398_AddFollowing.cs" />
-    <Compile Include="Migrations\201902252222398_AddFollowing.Designer.cs">
-      <DependentUpon>201902252222398_AddFollowing.cs</DependentUpon>
+    <Compile Include="Migrations\201902262004165_AddFollow.cs" />
+    <Compile Include="Migrations\201902262004165_AddFollow.Designer.cs">
+      <DependentUpon>201902262004165_AddFollow.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -345,8 +345,8 @@
     <EmbeddedResource Include="Migrations\201902220052089_AddAttendance.resx">
       <DependentUpon>201902220052089_AddAttendance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902252222398_AddFollowing.resx">
-      <DependentUpon>201902252222398_AddFollowing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902262004165_AddFollow.resx">
+      <DependentUpon>201902262004165_AddFollow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

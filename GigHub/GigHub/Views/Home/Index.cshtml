@@ -18,17 +18,16 @@
         <div class="details">
             <span class="artist">
                 @gig.Artist.Name
-
+                <button data-user-id="@gig.ArtistId" class="btn btn-link btn-sm pull-right js-toggle-follow">Follow</button>
             </span>
 
             <span class="genre">
                 @gig.Genre.Name &nbsp;
             </span>
             
-            <div class="btn-group">
-                <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-left js-toggle-attendance">Going?</button>
-                <button data-artist-id="@gig.ArtistId" class="btn btn-default btn-sm pull-right js-toggle-follow">Follow Artist</button>
-            </div>
+            
+            <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-left js-toggle-attendance">Going?</button>
+            
         </div>
     </li>
     }
@@ -54,7 +53,7 @@
        $(document).ready(function () {
            $(".js-toggle-follow").click(function (e) {
                var button = $(e.target)
-               $.post("/api/follows", { artistId: button.attr("data-artist-id") })
+               $.post("/api/follows", { followeeId: button.attr("data-user-id") })
                    .done(function () {
                        button
                            .removeClass("btn.default")

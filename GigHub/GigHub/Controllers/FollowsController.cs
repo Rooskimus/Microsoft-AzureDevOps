@@ -21,17 +21,17 @@ namespace GigHub.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Follow(ArtistDto dto)
+        public IHttpActionResult Follow(FollowDto dto)
         {
             var userId = User.Identity.GetUserId();
 
-            if (_context.Follows.Any(a => a.FollowerId == userId && a.ArtistId == dto.ArtistId))
+            if (_context.Follows.Any(a => a.FollowerId == userId && a.FolloweeId == dto.FolloweeId))
             {
                 return BadRequest("You're already following this artist.");
             }
             var follow = new Follow
             {
-                ArtistId = dto.ArtistId,
+                FolloweeId = dto.FolloweeId,
                 FollowerId = userId
             };
 

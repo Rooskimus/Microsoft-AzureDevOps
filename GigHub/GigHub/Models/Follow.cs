@@ -9,12 +9,12 @@ namespace GigHub.Models
 {
     public class Follow
     {
-        public ApplicationUser Artist { get; set; }
+        public ApplicationUser Followee { get; set; }
         public ApplicationUser Follower { get; set; }
 
         [Key]
         [Column(Order = 0)]
-        public string ArtistId { get; set; }
+        public string FolloweeId { get; set; }
 
         [Key]
         [Column(Order = 1)]
