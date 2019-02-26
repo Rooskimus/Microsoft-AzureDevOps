@@ -42,15 +42,21 @@ textarea {
     color: #fff;
 }
 
-.navbar-inverse .navbar-nav > .open > a,
+
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #FF2729;
 }
 
-.navbar-brand{
-    font-weight: 700;
+.navbar-inverse .navbar-toggle,
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #FF2729;
 }
+
+    .navbar-brand {
+        font-weight: 700;
+    }
 
 .dropdown-menu {
     box-shadow: none;
@@ -83,8 +89,8 @@ body {
 }
 
 .btn {
-    font-size: 17 px;
-    padding: 7px 20px;
+    /*font-size: 17 px;
+    padding: 7px 20px;*/
     border-radius: 9px;
     -ms-border-radius: 9px;
 }
@@ -101,10 +107,10 @@ body {
 
 .gigs > li .date {
     background: red;
-    border-radius: 9px;
-    color:white;
-    text-align:center;
+    color: white;
+    text-align: center;
     width: 60px;
+    border-radius: 6px 6px 9px 9px;
 }
 
 .gigs > li .date .month {
@@ -116,10 +122,10 @@ body {
 
 .gigs > li .date .day {
     background: #f7f7f7;
-    color:#333;
+    color: #333;
     font-size: 20px;
-    border-radius: 0px 0px 9px 9px;
     padding: 6px 12px;
+    border-radius: 0px 0px 6px 6px;
 }
 
 .gigs > li .details {
@@ -135,5 +141,4 @@ body {
 
 .gigs > li .details .genre {
     font-size: 15px;
-
 }
