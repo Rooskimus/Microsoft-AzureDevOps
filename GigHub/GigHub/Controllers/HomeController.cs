@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using GigHub.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers
 {
@@ -35,11 +36,32 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
-        public ActionResult About()
+        public ActionResult Following()
         {
-            ViewBag.Message = "Your application description page.";
+            var userId = User.Identity.GetUserId();
+            var followeeList = _context.Follows
+                .Join(_context.Users,
+                followee => followee.FolloweeId,
+                user => user.Id,
+                (followee, user) => new { Follow = followee, ApplicationUser = user })
+                .Where(f => f.Follow.FollowerId == userId)
+                .Select(u => u.ApplicationUser.Name);
+                
+                
+               
 
-            return View();
+            var followees = new List<string>();
+            foreach (var artist in followeeList)
+            {
+                followees.Add(artist);
+            }
+
+            var viewModel = new FollowingViewModel
+            {
+                Followees = followees
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult Contact()
