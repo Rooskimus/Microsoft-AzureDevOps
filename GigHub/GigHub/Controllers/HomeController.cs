@@ -36,34 +36,6 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
-        public ActionResult Following()
-        {
-            var userId = User.Identity.GetUserId();
-            var followeeList = _context.Follows
-                .Join(_context.Users,
-                followee => followee.FolloweeId,
-                user => user.Id,
-                (followee, user) => new { Follow = followee, ApplicationUser = user })
-                .Where(f => f.Follow.FollowerId == userId)
-                .Select(u => u.ApplicationUser.Name);
-                
-                
-               
-
-            var followees = new List<string>();
-            foreach (var artist in followeeList)
-            {
-                followees.Add(artist);
-            }
-
-            var viewModel = new FollowingViewModel
-            {
-                Followees = followees
-            };
-
-            return View(viewModel);
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
