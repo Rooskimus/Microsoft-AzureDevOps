@@ -1,9 +1,5 @@
-﻿using GigHub.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace GigHub.Models
 {
@@ -41,7 +37,7 @@ namespace GigHub.Models
         {
             var notification = new Notification(NotificationType.GigCreated, newGig);
             notification.OriginalDateTime = originalDateTime;
-            notification.OriginalVenue = originalVenue
+            notification.OriginalVenue = originalVenue;
             return notification;
         }
 

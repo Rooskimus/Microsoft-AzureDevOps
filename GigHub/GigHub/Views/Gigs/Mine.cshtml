@@ -58,19 +58,21 @@
                             className: 'btn-danger'
                         }
                     },
-                    callback: function () {
-                        $.ajax({
-                            url: "/api/gigs/" + link.attr("data-gig-id"),
-                            method: "DELETE"
-                        })
-                            .done(function () {
-                                link.parents("li").fadeOut(function () {
-                                    $(this).remove();
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/gigs/" + link.attr("data-gig-id"),
+                                method: "DELETE"
+                            })
+                                .done(function () {
+                                    link.parents("li").fadeOut(function () {
+                                        $(this).remove();
+                                    })
                                 })
-                            })
-                            .fail(function () {
-                                alert("Something failed!");
-                            })
+                                .fail(function () {
+                                    alert("Something failed!");
+                                })
+                        }
                     }
                 });
             });
