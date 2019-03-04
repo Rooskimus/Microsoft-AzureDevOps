@@ -5,6 +5,8 @@ namespace GigHub.Dtos
 {
     public class NotificationDto
     {
+        // This is the NotificaitonId, named simply Id so the mapper will map correctly.
+        public int Id { get; set; }
         public DateTime DateTime { get; set; }
         public NotificationType Type { get; set; }
         public DateTime? OriginalDateTime { get; set; }

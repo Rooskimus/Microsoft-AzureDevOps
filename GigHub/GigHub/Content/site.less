@@ -1,0 +1,232 @@
+﻿body {
+    padding-top: 90px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+
+.voffset {
+    margin-top: 2px;
+}
+.voffset1 {
+    margin-top: 5px;
+}
+.voffset2 {
+    margin-top: 10px;
+}
+.voffset3 {
+    margin-top: 20px;
+}
+.voffset4 {
+    margin-top: 40px;
+}
+.voffset5 { 
+    margin-top: 80px;
+}
+
+
+
+/* Bootstrap Overrides */
+.popover {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.navbar-inverse {
+    background-color: #ff4342;
+    border-color: #ff4342;
+
+    .navbar-nav {
+        > li {
+            > a {
+                color: #fff;
+            }
+        }
+
+        > .open {
+            > a {
+                &:hover {
+                    background-color: #FF2729;
+                }
+
+                &:focus {
+                    background-color: #FF2729;
+                }
+            }
+        }
+    }
+
+    .navbar-brand {
+        color: #fff;
+    }
+
+    .notifications {
+        position: relative;
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            right: -1px;
+            background: #a80a0a;
+        }
+    }
+
+    .navbar-toggle {
+        background-color: #FF2729;
+
+        &:hover {
+            background-color: #FF2729;
+        }
+
+        &:focus {
+            background-color: #FF2729;
+        }
+    }
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.dropdown-menu {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+body {
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 17px;
+    height: 44px;
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+
+    &:focus {
+        border-color: #2196f3;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+}
+
+.btn {
+    border-radius: 9px;
+    -ms-border-radius: 9px;
+}
+
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+        color: #fff;
+    }
+}
+
+/* Pag-level styles */
+.gigs {
+    list-style: none;
+
+    > li {
+        position: relative;
+        margin-bottom: 30px;
+
+        .date {
+            background: red;
+            color: white;
+            text-align: center;
+            width: 60px;
+            border-radius: 6px 6px 9px 9px;
+
+            .month {
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 2px 6px;
+            }
+
+            .day {
+                background: #f7f7f7;
+                color: #333;
+                font-size: 20px;
+                padding: 6px 12px;
+                border-radius: 0px 0px 6px 6px;
+            }
+        }
+
+        .details {
+            position: absolute;
+            top: 0;
+            left: 70px;
+
+            .artist {
+                font-weight: bold;
+                display: block;
+                padding-bottom: 6px;
+            }
+
+            .genre {
+                font-size: 15px;
+            }
+        }
+
+        .actions {
+            font-size: 15px;
+            display: none;
+        }
+    }
+
+    > li:hover .actions {
+        display: block
+    }
+}
+
+.popover-notifications {
+    .popover-content {
+        padding: 0;
+    }
+
+    ul.notifications {
+        list-style: none;
+        padding-left: 0;
+
+        .highlight {
+            font-weight: bold;
+        }
+
+        > li {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        > li:last-child {
+            border-bottom: none;
+        }
+    }
+}
