@@ -99,6 +99,10 @@ body {
   height: 44px;
   -ms-border-radius: 9px;
   border-radius: 9px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
 }
 .form-control:focus {
   border-color: #2196f3;
@@ -178,4 +182,7 @@ body {
 }
 .popover-notifications ul.notifications > li:last-child {
   border-bottom: none;
+}
+#searchGigs {
+  width: 300px;
 }
