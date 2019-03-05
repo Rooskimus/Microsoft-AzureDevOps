@@ -19,26 +19,28 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return View("Gigs");
-            }
             var gig = _context.Gigs
-                .Where(g => g.Id == id)
-                .Join(_context.Users, g => g.ArtistId, u => u.Id, (g, u) => new
-                {
-                    Gig = g,
-                    ArtistName = u.Name
-                })
-                .Single();
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
+                .SingleOrDefault(g => g.Id == id);
 
-            var viewModel = new GigDetailsViewModel
+            if (gig == null)
+                return HttpNotFound();
+
+            var viewModel = new GigDetailsViewModel { Gig = gig };
+
+            if (User.Identity.IsAuthenticated)
             {
-                ArtistName = gig.ArtistName,
-                Gig = gig.Gig
-            };
+                var userId = User.Identity.GetUserId();
+
+                viewModel.IsAttending = _context.Attendances
+                    .Any(a => a.GigId == gig.Id && a.AttendeeId == userId);
+
+                viewModel.IsFollowing = _context.Follows
+                    .Any(f => f.FolloweeId == gig.ArtistId && f.FollowerId == userId);
+            }
 
             return View(viewModel);
         }
@@ -74,11 +76,17 @@ namespace GigHub.Controllers
                 .Include(g => g.Genre)
                 .ToList();
 
+            var attendances = _context.Attendances
+                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+                .ToList()
+                .ToLookup(a => a.GigId);
+
             var viewModel = new GigsViewModel()
             {
                 UpcomingGigs = gigs,
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs I'm Attending"
+                Heading = "Gigs I'm Attending",
+                Attendances = attendances
             };
 
             return View("Gigs", viewModel);

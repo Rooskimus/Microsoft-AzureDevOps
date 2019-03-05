@@ -10,7 +10,8 @@ namespace GigHub.ViewModels
 {
     public class GigDetailsViewModel
     {
-        public string ArtistName { get; set; }
         public Gig Gig {get; set;}
+        public bool IsAttending { get; set; }
+        public bool IsFollowing { get; set; }
     }
 }
