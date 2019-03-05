@@ -19,6 +19,30 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return View("Gigs");
+            }
+            var gig = _context.Gigs
+                .Where(g => g.Id == id)
+                .Join(_context.Users, g => g.ArtistId, u => u.Id, (g, u) => new
+                {
+                    Gig = g,
+                    ArtistName = u.Name
+                })
+                .Single();
+
+            var viewModel = new GigDetailsViewModel
+            {
+                ArtistName = gig.ArtistName,
+                Gig = gig.Gig
+            };
+
+            return View(viewModel);
+        }
+
         [HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
         {
