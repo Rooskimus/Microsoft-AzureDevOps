@@ -19,8 +19,13 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var gig = _context.Gigs
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
