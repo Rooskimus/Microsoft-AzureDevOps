@@ -210,6 +210,7 @@
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\UserNotification.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Repositories\AttendanceRepository.cs" />
     <Compile Include="Repositories\FollowRepository.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
