@@ -1,46 +1,37 @@
-﻿using GigHub.Models;
+﻿using GigHub.Core.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using GigHub.ViewModels;
+using GigHub.Core;
+using GigHub.Core.ViewModels;
 using Microsoft.AspNet.Identity;
-using GigHub.Repositories;
+using GigHub.Persistence;
+using GigHub.Persistence.Repositories;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
-        private AttendanceRepository _attendanceRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController()
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-            _attendanceRepository = new AttendanceRepository(_context);
+            _unitOfWork = unitOfWork;
         }
 
         public ActionResult Index(string query = null)
         {
-            var upcomingGigs = _context.Gigs
-                .Include(g => g.Artist)
-                .Include(g => g.Genre)
-                .Where(g => g.DateTime > DateTime.Now && !g.IsCanceled);
+            var upcomingGigs = !String.IsNullOrWhiteSpace(query) ?
+                _unitOfWork.Gigs.GetAllUpcomingGigsWithQuery(query) : 
+                _unitOfWork.Gigs.GetAllUpcomingGigs();
 
-            if (!String.IsNullOrWhiteSpace(query))
-            {
-                upcomingGigs = upcomingGigs
-                    .Where(g =>
-                        g.Artist.Name.Contains(query) ||
-                        g.Genre.Name.Contains(query) ||
-                        g.Venue.Contains(query));
-            }
 
             var userId = User.Identity.GetUserId();
-            var attendances = _attendanceRepository.GetFutureAttendances(userId)
-                .ToLookup(a => a.GigId);
+            var attendances = _unitOfWork.Attendances.GetFutureAttendancesILookup(userId);
 
             var viewModel = new GigsViewModel
             {
