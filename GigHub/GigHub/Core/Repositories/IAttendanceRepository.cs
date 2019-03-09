@@ -9,5 +9,7 @@ namespace GigHub.Core.Repositories
         Attendance GetAttendance(int id, string userId);
         IEnumerable<Attendance> GetFutureAttendances(string userId);
         ILookup<int, Attendance> GetFutureAttendancesILookup(string userId);
+        void Add(Attendance attendance);
+        void Remove(Attendance attendance);
     }
 }

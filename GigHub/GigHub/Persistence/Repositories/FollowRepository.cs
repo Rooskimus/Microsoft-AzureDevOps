@@ -26,5 +26,15 @@ namespace GigHub.Persistence.Repositories
                 .Where(f => f.FollowerId == userId)
                 .Select(f => f.Followee);
         }
+
+        public void Add(Follow follow)
+        {
+            _context.Follows.Add(follow);
+        }
+
+        public void Remove(Follow follow)
+        {
+            _context.Follows.Remove(follow);
+        }
     }
 }

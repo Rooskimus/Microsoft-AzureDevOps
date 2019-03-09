@@ -8,17 +8,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using GigHub.Core;
 
 namespace GigHub.Controllers.Api
 {
     [Authorize]
     public class FollowsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FollowsController()
+        public FollowsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -26,18 +27,19 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            if (_context.Follows.Any(a => a.FollowerId == userId && a.FolloweeId == dto.FolloweeId))
-            {
-                return BadRequest("You're already following this artist.");
-            }
-            var follow = new Follow
+            var follow = _unitOfWork.Follows.GetFollow(userId, dto.FolloweeId);
+
+            if (follow != null)
+                return BadRequest("Follow already exists.");
+
+            follow = new Follow
             {
                 FolloweeId = dto.FolloweeId,
                 FollowerId = userId
             };
 
-            _context.Follows.Add(follow);
-            _context.SaveChanges();
+            _unitOfWork.Follows.Add(follow);
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -47,14 +49,13 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var follow = _context.Follows
-                .SingleOrDefault(f => f.FollowerId == userId && f.FolloweeId == id);
+            var follow = _unitOfWork.Follows.GetFollow(userId, id);
 
-            if (follow == null) 
+            if (follow == null)
                 return NotFound();
 
-            _context.Follows.Remove(follow);
-            _context.SaveChanges();
+            _unitOfWork.Follows.Remove(follow);
+            _unitOfWork.Complete();
 
             return Ok(id);
 
