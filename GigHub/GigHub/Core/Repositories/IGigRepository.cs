@@ -5,7 +5,7 @@ namespace GigHub.Core.Repositories
 {
     public interface IGigRepository
     {
-        IEnumerable<Gig> GetFutureGigsWithGenre(string userId);
+        IEnumerable<Gig> GetUpcomingGigsByArtist(string userId);
         Gig GetGig(int? id);
         List<Gig> GetGigsUserAttending(string userId);
         Gig GetGigWithAttendees(int gigId);
